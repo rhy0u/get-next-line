@@ -8,7 +8,8 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	fd = open(av[1], O_RDONLY);
-	get_next_line(fd, &s);
-	printf("%s", s);
+	while(get_next_line(fd, &s))
+		printf("%s\n", s);
+	close(fd);
 	return (0);
 }

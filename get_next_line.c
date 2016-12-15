@@ -18,21 +18,17 @@ int		get_next_line(int fd, char **line)
 {
 	int			next;
 	int			ret;
-	char		*tmp;
-	static char	*buf;
+	static char	buf[BUFF_SIZE + 1];
 
 	*line = "\0";
-	next = 0;
-	tmp = ft_strjoin(*line, buf);
-	while((ret = read(fd, buf, BUFF_SIZE)) && !next)
+	next = -1;
+	if(*buf)
+		*line = ft_strjoin(*line, &buf[ft_is_next(buf) + 1]);
+	while(((ret = read(fd, buf, BUFF_SIZE)) != -1) && (next == -1))
 	{
 		buf[ret] = '\0';
 		*line = ft_strjoin(*line, buf);
-		if(ft_is_next(buf) >= 0)
-		{
-			next = 1;
-			buf += ft_is_next(buf) + 1;
-		}
+		next = ft_is_next(buf);
 	}
 	*line = ft_strsub(*line, 0, ft_is_next(*line));
 	if (!ret)
