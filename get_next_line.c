@@ -42,6 +42,10 @@ int		get_next_line(int fd, char **line)
 		*line = ft_strsub(*line, 0, ft_is_next(*line));
 		tmp = ft_strsub(tmp, ft_is_next(tmp) + 1,
 			ft_strlen(tmp) - ft_is_next(tmp) - 1);
+		if (!**line)
+			return(-1);
+		if (!*tmp)
+			return (0);
 		return (1);
 	}
 	while (next == -1 && ret != 0 && ret != -1)

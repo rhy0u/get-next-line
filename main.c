@@ -10,7 +10,6 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	while(get_next_line(fd, &s))
 		printf("%s\n", s);
-	printf("%s\n", s);
 	close(fd);
 	return (0);
 }
