@@ -6,7 +6,7 @@
 /*   By: jcentaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 17:44:26 by jcentaur          #+#    #+#             */
-/*   Updated: 2016/12/16 17:44:29 by jcentaur         ###   ########.fr       */
+/*   Updated: 2016/12/24 13:16:08 by rhy0u            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 # include <unistd.h>
 # define BUFF_SIZE 1
 
-typedef struct	s_save
+typedef struct			s_save
 {
-	int			fd;
-	char		buf[BUFF_SIZE + 1];
-	s_save		*next;
-}				t_save;
+	int					fd;
+	char				*buf;
+	struct s_save		*next;
+}						t_save;
 
+int				get_next_line(int fd, char **line);
+char			*ft_strchr(const char *s, int c);
 char			*ft_strjoin(const char *s1, const char *s2);
 char			*ft_strsub(const char *s, int start, size_t size);
 size_t			ft_strlen(const char *s);
