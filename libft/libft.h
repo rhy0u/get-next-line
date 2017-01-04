@@ -6,7 +6,7 @@
 /*   By: rhy0u <jsn.centaure@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:43:42 by rhy0u             #+#    #+#             */
-/*   Updated: 2016/11/21 15:31:38 by jcentaur         ###   ########.fr       */
+/*   Updated: 2017/01/04 11:06:21 by jcentaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ void				ft_swap(char *a, char *b);
 void				ft_color(t_color col);
 void				ft_putstrcol(char const *s, t_color col);
 int					ft_strcount(char const *s, char c);
+char				*ft_strjoinf(char *s1, char const *s2);
+char				*ft_strsubf(char *s, unsigned int start, size_t len);
 
 #endif

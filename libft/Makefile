@@ -6,7 +6,7 @@
 #    By: rhy0u <jsn.centaure@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/03 20:30:33 by rhy0u             #+#    #+#              #
-#    Updated: 2016/11/21 15:39:24 by jcentaur         ###   ########.fr        #
+#    Updated: 2017/01/04 11:06:53 by jcentaur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC		=	ft_memset.c ft_bzero.c ft_tolower.c ft_toupper.c ft_isprint.c \
 			ft_memalloc.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 			ft_putstr_fd.c ft_itoa.c ft_strrev.c ft_strsplit.c ft_lstnew.c \
 			ft_lstdelone.c ft_lstdel.c ft_lstiter.c ft_lstmap.c ft_lstadd.c \
-			ft_swap.c ft_putstrcol.c ft_color.c ft_strcount.c ft_count_if.c
+			ft_swap.c ft_putstrcol.c ft_color.c ft_strcount.c ft_count_if.c \
+			ft_strjoinf.c ft_strsubf.c
 
 OBJ 	= 	$(SRC:%.c=%.o)
 
