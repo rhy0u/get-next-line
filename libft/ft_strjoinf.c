@@ -18,23 +18,18 @@ char	*ft_strjoinf(char *s1, char const *s2)
 	int		i;
 	int		j;
 
-	if (!s1 || !s2)
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	if (!(res = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
-	res = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
-	{
+	i = -1;
+	while (s1[++i] != '\0')
 		res[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
+	j = -1;
+	while (s2[++j] != '\0')
 		res[i + j] = s2[j];
-		j++;
-	}
-	free(s1);
+	ft_strdel(&s1);
 	return (res);
 }

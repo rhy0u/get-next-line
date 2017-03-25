@@ -17,9 +17,9 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
-# include <stdio.h>
+# include "libft/libft.h"
 # include <unistd.h>
-# define BUFF_SIZE 1
+# define BUFF_SIZE 100
 
 typedef struct		s_save
 {
@@ -29,12 +29,5 @@ typedef struct		s_save
 }					t_save;
 
 int					get_next_line(int fd, char **line);
-char				*ft_strdup(const char *s);
-char				*ft_strnew(size_t size);
-int					ft_strcmp(const char *s1, const char *s2);
-char				*ft_strchr(const char *s, int c);
-char				*ft_strjoinf(char *s1, const char *s2);
-char				*ft_strjoin(const char *s1, const char *s2);
-char				*ft_strsub(const char *s, int start, size_t size);
-size_t				ft_strlen(const char *s);
+
 #endif
