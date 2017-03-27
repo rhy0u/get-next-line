@@ -6,7 +6,7 @@
 /*   By: jcentaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 11:09:06 by jcentaur          #+#    #+#             */
-/*   Updated: 2017/01/04 13:21:32 by jcentaur         ###   ########.fr       */
+/*   Updated: 2017/03/27 08:51:31 by jcentaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,31 @@ int		get_line(char *s)
 	return (s[i]) ? i : -1;
 }
 
-void	ft_cheat(char **line, t_save *tmp, char **test)
+void	del_save(t_save **alst)
+{
+	t_save	*tmp;
+
+	tmp = (*alst)->next;
+	ft_strdel(&(*alst)->buf);
+	free(*alst);
+	*alst = tmp;
+}
+
+void	ft_cheat(char **line, t_save *tmp)
 {
 	int		r;
 
-	r = get_line(*test);
+	r = get_line(tmp->buf);
 	if (r != -1)
 	{
-		tmp->buf = ft_strsub(*test, r + 1,
-			ft_strlen(*test) - (r + 1));
-		*line = ft_strsub(*test, 0, r);
-		ft_strdel(test);
+		*line = ft_strsub(tmp->buf, 0, r);
+		tmp->buf = ft_strsubf(tmp->buf, r + 1,
+			ft_strlen(tmp->buf) - (r + 1));
 	}
 	else
 	{
-		*line = ft_strdup(*test);
-		ft_strdel(test);
-		tmp->buf = NULL;
+		*line = ft_strdup(tmp->buf);
+		ft_strdel(&tmp->buf);
 	}
 }
 
@@ -64,27 +72,25 @@ int		get_next_line(int fd, char **line)
 	int				ret;
 	char			buf[BUFF_SIZE + 1];
 	t_save			*tmp;
-	char			*test;
 	static t_save	*save = NULL;
 
 	if (!line || fd < 0)
 		return (-1);
 	tmp = search_fd(fd, &save);
-	test = NULL;
-	if (tmp->buf)
-	{
-		test = ft_strdup(tmp->buf);
-		free(tmp->buf);
-	}
 	ret = 1;
-	while (ret && get_line(test) == -1)
+	while (ret && get_line(tmp->buf) == -1)
 	{
 		ret = read(fd, buf, BUFF_SIZE);
 		if (ret == -1)
 			return (-1);
 		buf[ret] = '\0';
-		test = ft_strjoinf(test, buf);
+		tmp->buf = ft_strjoinf(tmp->buf, buf);
 	}
-	ft_cheat(line, tmp, &test);
-	return ((!ret && !**line && !tmp->buf) ? 0 : 1);
+	ft_cheat(line, tmp);
+	if (!ret && !**line && !tmp->buf)
+	{
+		del_save(&tmp);
+		return (0);
+	}
+	return (1);
 }
